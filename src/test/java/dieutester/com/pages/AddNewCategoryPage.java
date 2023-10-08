@@ -5,9 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
+import static dieutester.com.constants.ConfigData.*;
 import static dieutester.com.keywords.ActionKeywords.*;
 
 public class AddNewCategoryPage {
@@ -58,14 +60,23 @@ public class AddNewCategoryPage {
         getWebElement(inputSearchBannerFile).sendKeys(bannerName, Keys.ENTER);
         clickElement(ImageBanner);
         clickElement(buttonAddFilesBanner);
+        sleep(5);
     }
 
     public void selectIcon(String iconName) {
+        waitForElementPresent(buttonBrowserIcon,5);
         clickElement(buttonBrowserIcon);
         waitForElementVisible(inputSearchIconFile);
         getWebElement(inputSearchIconFile).sendKeys(iconName, Keys.ENTER);
         clickElement(ImageIcon);
         clickElement(buttonAddFilesIcon);
+    }
+    public void verifyCategoryInformationPage(){
+        waitForPageLoaded();
+        Assert.assertTrue(getWebElement(headerAddNewCategory).isDisplayed(),
+                "header Add NewCategory not found");
+        Assert.assertEquals(getTextElement(headerAddNewCategory),HEADER_AddNewCategory,
+                "header Add NewCategory not found");
     }
 
     public void AddNewCategory(String CATEGORY_NAME) {

@@ -10,6 +10,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -40,6 +45,12 @@ public class ActionKeywords {
         logConsole("==> Text: " + getWebElement(by).getText());
         return getWebElement(by).getText();
     }
+    public static String getAttributeElement(By by, String attributeName) {
+        waitForElementVisible(by);
+        logConsole("Get attribute value of element " + by);
+        logConsole("==> Attribute value: " + getWebElement(by).getAttribute(attributeName));
+        return getWebElement(by).getAttribute(attributeName);
+    }
 
     public static void setText(By by, String text) {
         waitForElementVisible(by);
@@ -57,6 +68,11 @@ public class ActionKeywords {
         Select select = new Select(driver.findElement(by));
         select.selectByVisibleText(text);
     }
+    public static void waitForElementPresent(By by, int second) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(second));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
 
     public static boolean checkElementExist(By by) {
         List<WebElement> listElement = driver.findElements(by);
@@ -71,7 +87,7 @@ public class ActionKeywords {
     }
 
     public static void waitForElementVisible(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
@@ -100,6 +116,37 @@ public class ActionKeywords {
                 error.printStackTrace();
                 Assert.fail("FAILED. Timeout waiting for page load.");
             }
+        }
+    }
+    public static void sleep(double second) {
+        try {
+            Thread.sleep((long) (1000 * second));
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void captureScreenImage(String imageName) {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Get size screen browser
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(screenSize);
+        //Khởi tạo kích thước khung hình với kích cỡ trên
+        Rectangle screenRectangle = new Rectangle(screenSize);
+        //Tạo hình chụp với độ lớn khung đã tạo trên
+        BufferedImage image = robot.createScreenCapture(screenRectangle);
+        //Lưu hình vào dạng file với dạng png
+        File file = new File(imageName + ".png");
+        try {
+            ImageIO.write(image, "png", file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
