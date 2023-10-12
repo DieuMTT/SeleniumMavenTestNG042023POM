@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite AddNewCategory" verbose="1">
+    <parameter name="browser" value="chrome"/>
+    <test name="Test Add New Category">
+        <classes>
+            <class name="dieutester.com.testcases.AddNewProductTest"/>
+        </classes>
+    </test>
+</suite>
