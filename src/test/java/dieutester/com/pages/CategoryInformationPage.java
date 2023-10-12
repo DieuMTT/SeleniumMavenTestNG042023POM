@@ -30,7 +30,7 @@ public class CategoryInformationPage {
 
     public CategoryInformationPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         new ActionKeywords(driver);
     }
 

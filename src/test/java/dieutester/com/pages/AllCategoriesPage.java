@@ -30,7 +30,7 @@ public class AllCategoriesPage {
 
     public AllCategoriesPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         new ActionKeywords(driver);
     }
 
@@ -40,13 +40,15 @@ public class AllCategoriesPage {
         Assert.assertEquals(getTextElement(headerAllCategoriesPage), "All categories", "Header Page of categories page not match.");
     }
 
-    public void clickAddNewCategoryButton() {
+    public AddNewCategoryPage clickAddNewCategoryButton() {
         waitForElementVisible(buttonAddNewCategory);
         clickElement(buttonAddNewCategory);
+        return new AddNewCategoryPage(driver);
     }
-    public void clickEditCategoryButton() {
+    public CategoryInformationPage clickEditCategoryButton() {
         waitForElementVisible(buttonEditCategory);
         clickElement(buttonEditCategory);
+        return new CategoryInformationPage(driver);
     }
     public void clickDeleteCategoryButton() {
         waitForElementVisible(buttonDeleteCategory);

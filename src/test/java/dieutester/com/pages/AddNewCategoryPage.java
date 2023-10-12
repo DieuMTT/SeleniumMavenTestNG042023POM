@@ -40,7 +40,7 @@ public class AddNewCategoryPage {
 
     public AddNewCategoryPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         new ActionKeywords(driver);
     }
 
@@ -55,21 +55,25 @@ public class AddNewCategoryPage {
     }
 
     public void selectBanner(String bannerName) {
+        waitForElementVisible(buttonBrowserIcon);
         clickElement(buttonBrowserBanner);
         waitForElementVisible(inputSearchBannerFile);
         getWebElement(inputSearchBannerFile).sendKeys(bannerName, Keys.ENTER);
+        waitForPageLoaded();
         clickElement(ImageBanner);
         clickElement(buttonAddFilesBanner);
-        sleep(5);
+        waitForPageLoaded();
     }
 
     public void selectIcon(String iconName) {
-        waitForElementPresent(buttonBrowserIcon,5);
+        waitForElementVisible(buttonBrowserIcon);
         clickElement(buttonBrowserIcon);
         waitForElementVisible(inputSearchIconFile);
         getWebElement(inputSearchIconFile).sendKeys(iconName, Keys.ENTER);
+        waitForPageLoaded();
         clickElement(ImageIcon);
         clickElement(buttonAddFilesIcon);
+        waitForPageLoaded();
     }
     public void verifyCategoryInformationPage(){
         waitForPageLoaded();

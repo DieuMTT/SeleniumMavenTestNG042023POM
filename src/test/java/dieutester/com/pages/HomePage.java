@@ -9,7 +9,7 @@ import java.time.Duration;
 
 import static dieutester.com.keywords.ActionKeywords.*;
 
-public class MenuHomePage {
+public class HomePage {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -17,16 +17,17 @@ public class MenuHomePage {
     private By menuAddNewProduct = By.xpath("//span[normalize-space()='Add New Product']");
     private By menuCategory = By.xpath("//span[normalize-space()='Category']");
 
-    public MenuHomePage(WebDriver driver) {
+    public HomePage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         new ActionKeywords(driver);
     }
 
-    public void clickMenuCategory() {
+    public AllCategoriesPage clickMenuCategory() {
         waitForPageLoaded();
         clickElement(menuProducts);
         clickElement(menuCategory);
+        return new AllCategoriesPage(driver);
     }
 
 

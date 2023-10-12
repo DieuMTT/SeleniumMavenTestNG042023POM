@@ -23,7 +23,7 @@ public class LoginPage {
     //Khai báo hàm  Contructor
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     private void setEmail(String email) {
@@ -41,10 +41,11 @@ public class LoginPage {
         driver.findElement(buttonLogin).click();
     }
 
-    public void loginCMS(String email, String password) {
+    public HomePage loginCMS(String email, String password) {
         driver.get(URL_LOGIN);
         setEmail(email);
         setPassword(password);
         clickLoginButton();
+        return new HomePage(driver);
     }
 }
