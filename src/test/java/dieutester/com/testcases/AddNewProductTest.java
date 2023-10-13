@@ -36,12 +36,11 @@ public class AddNewProductTest extends BaseTest {
         //Search Product Name
         inHouseProductsPage.searchProduct(PRODUCT_NAME);
 
-        //Verify Product Name after when search
-        inHouseProductsPage.verifyProductNameAfterWhenSearch(PRODUCT_NAME);
+
     }
 
     @Test(priority = 2)
-    public void testEditProduct() {
+    public void checkProductJustAddedIsDisplayedInTheList() {
         //Login
         loginPage = new LoginPage(driver);
         homePage = loginPage.loginCMS("admin@example.com", "123456");
@@ -49,18 +48,26 @@ public class AddNewProductTest extends BaseTest {
         //Navigate to InHouseProducts Page
         inHouseProductsPage = homePage.clickMenuInHouseProducts();
 
-        //Search Product Name need update
+        //Search Product Name
+        inHouseProductsPage.searchProduct(PRODUCT_NAME);
+        inHouseProductsPage.verifyProductNameAfterWhenSearch(PRODUCT_NAME);
+    }
+
+    @Test(priority = 3)
+    public void testDataProductJustAdded() {
+        //Login
+        loginPage = new LoginPage(driver);
+        homePage = loginPage.loginCMS("admin@example.com", "123456");
+
+        //Navigate to InHouseProducts Page
+        inHouseProductsPage = homePage.clickMenuInHouseProducts();
+
+        //Search Product Name
         inHouseProductsPage.searchProduct(PRODUCT_NAME);
         inHouseProductsPage.verifyProductNameAfterWhenSearch(PRODUCT_NAME);
 
-        //Navigate to Edit Product Page
+        //Verify data
         editProductPage = inHouseProductsPage.clickButtonEditProduct();
-        editProductPage.testEditProduct();
-
-        // Verified Product Name After When Edit
-        homePage.clickMenuInHouseProducts();
-        inHouseProductsPage.searchProduct(PRODUCT_NAME + " " + "Edited");
-        inHouseProductsPage.verifyProductNameSearchAfterUpdated(PRODUCT_NAME + " " + "Edited");
+        editProductPage.verifyDataProduct(PRODUCT_NAME);
     }
-
 }

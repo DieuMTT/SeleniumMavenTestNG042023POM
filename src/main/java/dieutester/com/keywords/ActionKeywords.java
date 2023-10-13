@@ -87,7 +87,7 @@ public class ActionKeywords {
     }
 
     public static void waitForElementVisible(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(12), Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 

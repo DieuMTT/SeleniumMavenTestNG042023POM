@@ -20,7 +20,7 @@ public class AddNewProductPage {
     private By headerAddNewProductPage = By.xpath("//h5[normalize-space()='Add New Product']");
     private By headerProductInformationPage = By.xpath("//h5[normalize-space()='Product Information']");
     private By inputProductName = By.xpath("//label[.='Product Name *']/following-sibling::div//input");
-    private By dropdownCategory = By.xpath("//button[@title='Demo category 1']");
+    private By dropdownCategory = By.xpath("//label[contains(.,'Category *')]/following-sibling::div//button");
     private By inputSearchCategory = By.xpath("//div[@id='category']//input[@type='search']");
     private By inputUnit = By.xpath("//label[normalize-space()='Unit']/following-sibling::div//input");
     private By inputMinimumPurchaseQty = By.xpath("//label[.='Minimum Purchase Qty *']/following-sibling::div/input");
@@ -63,6 +63,7 @@ public class AddNewProductPage {
 
     public InHouseProductsPage testAddNewProduct(String productName) {
         waitForPageLoaded();
+
         //Input Product Information
         setText(inputProductName, productName);
         selectCategoryName(CATEGORY_NAME);
